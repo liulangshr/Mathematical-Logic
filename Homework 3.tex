@@ -1,0 +1,419 @@
+%定义文档类型和基本的页面设置
+\documentclass[12pt,a4paper]{article}
+
+%加载要用到的宏包
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bussproofs}
+\usepackage{geometry}   %设置页边距的宏包
+
+\geometry{left=1cm,right=1cm,top=2.5cm,bottom=2.5cm} 
+
+%自定义环境
+\theoremstyle{plain}
+\newtheorem{exercise}{Exercise}
+
+%文档的标题
+\title{Homework 3}
+
+%文档的作者
+\author{Wei Lai\\
+1801211383}
+
+%文档的日期
+\date{Deadline for Ex.\ 1 to Ex.\ 6: 23:59, October 25th, 2018
+\\
+Deadline for Ex.\ 7 to Ex.\ 9: 23:59, November 1st, 2018}
+
+%文档内容开始
+\begin{document}
+
+%打出文档的标题、作者、日期等信息
+\maketitle
+
+Please do Exercises 2.1.3, 2.2.1, 2.3.2, 2.4.1 and 2.4.2 in the textbook and compare your solutions to those at the end of the book.
+
+You do NOT need to hand in your solutions to the above exercises.
+
+\ \\
+\begin{exercise}
+Please solve Exercise 2.4.3 in the textbook.
+(You just need to write down the answers; there is no need to explain or to give reasons.)
+
+Each of the following derivations proves a sequent. 
+Write out the sequent that it proves.
+
+\begin{itemize}
+
+\item[(a)] \
+%
+\begin{prooftree}
+\AxiomC{$[ \phi ]^1$}
+\RightLabel{($\rightarrow$I)}
+\UnaryInfC{$( \psi \rightarrow \phi )$}
+\RightLabel{($\rightarrow$I),1}
+\UnaryInfC{$( \phi \rightarrow ( \psi \rightarrow \phi ) )$}
+\end{prooftree}
+%
+\item[(b)] \
+
+\begin{prooftree}
+\AxiomC{$\phi$}
+\RightLabel{($\rightarrow$I)}
+\UnaryInfC{$( \psi \rightarrow \phi )$}
+\RightLabel{($\rightarrow$I)}
+\UnaryInfC{$( \phi \rightarrow ( \psi \rightarrow \phi ) )$}
+\end{prooftree}
+
+\item[(c)] \
+
+\begin{prooftree}
+\AxiomC{$[ \psi ]^1$}
+\AxiomC{$( \phi \wedge \psi )$}
+\RightLabel{($\wedge$)E}
+\UnaryInfC{$\phi$}
+\RightLabel{($\wedge$I)}
+\BinaryInfC{$(\psi \wedge \phi )$}
+\RightLabel{($\rightarrow$I),1}
+\UnaryInfC{$( \psi \rightarrow (\psi \wedge \phi ) )$}
+\end{prooftree}
+
+\item[(d)] \
+
+\begin{prooftree}
+\AxiomC{$[ \phi ]^1$}
+\RightLabel{($\rightarrow$I),1}
+\UnaryInfC{$( \phi \rightarrow \phi )$}
+\end{prooftree}
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}[Solution]\ 
+    \begin{enumerate}
+        \item $ \vdash ( \phi \rightarrow ( \psi \rightarrow \phi ) )$
+        \item $\phi \vdash ( \phi \rightarrow ( \psi \rightarrow \phi ) )$
+        \item $(\phi \wedge \phi) \vdash ( \psi \rightarrow (\psi \wedge \phi ) )$
+        \item $\vdash ( \phi \rightarrow \phi )$
+    \end{enumerate}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve (c) - (f) and (h) in Exercise 2.4.4 in the textbook:
+
+Write out derivations to prove each of the following sequents.
+%
+\begin{itemize}
+
+\item[(c)] $\vdash ( ( \phi \rightarrow ( \theta \rightarrow \psi ) ) \rightarrow ( \theta \rightarrow ( \phi \rightarrow \psi ) ) )$.
+
+\item[(d)] $\{ ( \phi \rightarrow \psi ) , ( \phi \rightarrow \chi) \} \vdash ( \phi \rightarrow ( \psi \wedge \chi ))$.
+
+\item[(e)] $\{ ( \phi \rightarrow \psi ) , ( ( \phi \wedge \psi ) \rightarrow \chi ) \} \vdash ( \phi \rightarrow \chi )$.
+
+\item[(f)] $\{ ( \phi \rightarrow ( \psi \rightarrow \chi )) \} \vdash (( \phi \wedge \psi) \rightarrow \chi)$.
+
+%\item[(g)] $\vdash (( \phi \rightarrow \psi ) \rightarrow (( \psi \rightarrow \theta ) \rightarrow ( \phi \rightarrow \theta )))$.
+
+\item[(h)] $\vdash (( \phi \rightarrow ( \psi \wedge \theta )) \rightarrow (( \phi \rightarrow \theta ) \wedge ( \phi \rightarrow \psi )))$.
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}\
+    \begin{enumerate}
+        \item[(c)]\ 
+            \begin{prooftree}
+                \AxiomC{$[\theta]^2$}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$[(\phi \to (\theta \to \psi))]^3$}
+                \RightLabel{$(\to E)$}
+                \BinaryInfC{$(\theta \to \psi)$}
+                \RightLabel{$(\to E)$}
+                \BinaryInfC{$\psi$}
+                \RightLabel{$(\to I)$,1}
+                \UnaryInfC{$(\phi \to \psi)$}
+                \RightLabel{$(\to I)$,2}
+                \UnaryInfC{$(\theta \to (\phi \to \psi))$}
+                \RightLabel{($\to I$),3}
+                \UnaryInfC{$(((\phi \to (\theta \to \psi))\to (\theta \to (\phi \to \psi)))$}
+            
+                
+             \end{prooftree}
+        \item[(d)]\ 
+            \begin{prooftree}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$(\phi \to \psi)$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\psi$}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$(\phi \to \chi)$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\chi$}
+                \RightLabel{($\wedge I$)}
+                \BinaryInfC{$\psi \wedge \chi$}
+                \RightLabel{($\to I$),1}
+                \UnaryInfC{$(\phi \to (\psi \wedge \chi))$}
+            \end{prooftree}
+        \item[(e)]\
+            \begin{prooftree}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$(\phi \to \psi)$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\psi$}
+                \RightLabel{($\wedge I$)}
+                \BinaryInfC{$(\phi \wedge \psi)$}
+                \AxiomC{$((\phi \wedge \psi ) \to \chi))$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\chi$}
+                \RightLabel{($\to I$),1}
+                \UnaryInfC{$(\phi \to \chi)$}
+            \end{prooftree}
+        \item[(f)]\
+            \begin{prooftree}
+                \AxiomC{$[\phi \wedge \psi]^1$}
+                \RightLabel{($\wedge E$)}
+                \UnaryInfC{$\psi$}
+                \AxiomC{$[\phi \wedge \psi]^1$}
+                \RightLabel{($\wedge E$)}
+                \UnaryInfC{$\phi$}
+                \AxiomC{$(\phi \to (\psi \to \chi))$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$(\psi \to \chi)$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\chi$}
+                \RightLabel{$(\to I)$,1}
+                \UnaryInfC{$((\phi \wedge \psi) \to \chi)$}
+            \end{prooftree}
+        \item[(h)]\
+            \begin{prooftree}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$[(\phi \to (\psi \wedge \theta))]^2$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\psi \wedge \theta$}
+                \RightLabel{$(\wedge E)$}
+                \UnaryInfC{$\theta$}
+                \RightLabel{($\to I$)}
+                \UnaryInfC{$(\phi \to \theta)$}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$[(\phi \to (\psi \wedge \theta))]^2$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\psi \wedge \theta$}
+                \RightLabel{$(\wedge E)$}
+                \UnaryInfC{$\psi$}
+                \RightLabel{($\to I$),1}
+                \UnaryInfC{$(\phi \to \psi)$}
+                \RightLabel{($\wedge I$)}
+                \BinaryInfC{$(( \phi \rightarrow \theta ) \wedge ( \phi \rightarrow \psi )))$}
+                \RightLabel{($\wedge I$),2}
+                \UnaryInfC{$ (( \phi \rightarrow ( \psi \wedge \theta )) \rightarrow (( \phi \rightarrow \theta ) \wedge ( \phi \rightarrow \psi )))$}
+            \end{prooftree}
+        
+    \end{enumerate}
+
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve (a) - (c) in Exercise 2.5.1 in the textbook:
+
+Give derivations to prove the following sequents:
+%
+\begin{itemize}
+
+\item[(a)] $\{ \phi , ( \phi \leftrightarrow \psi ) \} \vdash \psi$.
+
+\item[(b)] $\vdash ( \phi \leftrightarrow \phi )$.
+
+\item[(c)] $\{ ( \phi \leftrightarrow \psi ) , ( \psi \leftrightarrow \chi ) \} \vdash ( \phi \leftrightarrow \chi )$.
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}\
+    \begin{enumerate}
+        \item[(a)]\
+            \begin{prooftree}
+                \AxiomC{$\phi$}
+                \AxiomC{$(\phi \leftrightarrow \psi)$}
+                \RightLabel{($\leftrightarrow E$)}
+                \UnaryInfC{$(\phi \to \psi)$}
+                \RightLabel{($\to E$)}
+                \BinaryInfC{$\psi$}
+            \end{prooftree}   
+        \item[(b)]\ 
+            \begin{prooftree}
+                \AxiomC{$[\phi]^1$}
+                \RightLabel{$(\to I)$}
+                \UnaryInfC{$\phi \to \phi$}
+                \AxiomC{$[\phi]^1$}
+                \RightLabel{$(\to I)$,1}
+                \UnaryInfC{$\phi \to \phi$}
+                \RightLabel{($\leftrightarrow I$)}
+                \BinaryInfC{$\phi \leftrightarrow \phi$}
+            \end{prooftree}
+        \item[(c)]\
+            \begin{prooftree}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$(\phi \leftrightarrow \psi)$}
+                \RightLabel{$(\leftrightarrow E)$}
+                \UnaryInfC{$(\phi \to \psi)$}
+                \RightLabel{$(\to E)$}
+                \BinaryInfC{$\psi$}
+                \AxiomC{$\psi \leftrightarrow \chi$}
+                \RightLabel{$(\leftrightarrow E)$}
+                \UnaryInfC{$(\psi \to \chi)$}
+                \RightLabel{$(\to E)$}
+                \BinaryInfC{$\chi$}
+                \RightLabel{$(\to I)$,1}
+                \UnaryInfC{$\phi \to \chi$}
+                \AxiomC{$[\chi]^2$}
+                \AxiomC{$(\psi \leftrightarrow \chi)$}
+                \RightLabel{$(\leftrightarrow E)$}
+                \UnaryInfC{$(\chi \to \psi)$}
+                \RightLabel{$(\to E)$}
+                \BinaryInfC{$\psi$}
+                \AxiomC{$\psi \leftrightarrow \chi$}
+                \RightLabel{$(\leftrightarrow E)$}
+                \UnaryInfC{$(\psi \to \phi)$}
+                \RightLabel{$(\to E)$}
+                \BinaryInfC{$\phi$}
+                \RightLabel{$(\to I)$,2}
+                \UnaryInfC{$\chi \to \phi$}
+                \RightLabel{$(\leftrightarrow I)$}
+                \BinaryInfC{$\phi \leftrightarrow \chi$}
+            \end{prooftree}
+            
+    \end{enumerate}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 2.5.2 in the textbook:
+
+Let $S$ be any set of statements, and let ${\sim}$ be the relation on $S$ defined by: for all $\phi , \psi \in S$,
+%
+\[
+\phi \sim \psi \mbox{ if and only if } \vdash ( \phi \leftrightarrow \psi ).
+\]
+Show that $\sim$ is an equivalence relation on $S$.
+\end{exercise}
+
+\begin{proof}\ 
+    \begin{enumerate}
+        \item[a.] $\sim$ is reflexive:\\
+        From exercise 3b above, we have $\vdash (\phi \to \phi)$.
+        Hence, for every $\phi \in S$, $\phi \sim \phi$.
+        
+        \item[b.] $\sim$ is transitive:\\
+        For all $\phi$,$\psi$ and $\chi$ in $S$, if $\phi \sim \psi$ and $\psi \sim \chi$, then $\vdash ( \phi \leftrightarrow \psi )$ and $\vdash ( \psi \leftrightarrow \chi )$. From exercise 3c, we have $\vdash ( \phi \leftrightarrow \chi )$. Hence, $\phi \sim \chi$.
+        
+        \item[c.] $\sim$ is symmetric:\\
+        For all $\phi$ and $\psi$ in $S$, if $\phi \sim \psi$, then $\vdash (\phi \leftrightarrow \psi) $. We prove $\psi \leftrightarrow \phi$ by this tree:
+            \begin{prooftree}
+                \AxiomC{$(\phi \leftrightarrow \psi)$}
+                \RightLabel{$(\leftrightarrow E)$}
+                \UnaryInfC{$(\psi \to \phi)$}
+                \AxiomC{$(\phi \leftrightarrow \psi)$}
+                \RightLabel{$(\leftrightarrow E)$}
+                \UnaryInfC{$(\phi \to \psi)$}
+                \RightLabel{$(\leftrightarrow I)$}
+                \BinaryInfC{$\psi \leftrightarrow \phi$}
+            \end{prooftree}
+        Thus, $\psi \sim \phi$.
+        
+        \item[d.] From $a$, $b$ and $c$, $\sim$ is an equivalence.
+    \end{enumerate}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 2.5.4 in the textbook:
+
+Devise suitable sequent rules for $\leftrightarrow$.
+\end{exercise}
+
+\begin{proof}[Solution]\
+    \begin{enumerate}
+        \item[a.] Sequent Rule $(\leftrightarrow E)$:\\
+        If $(\Gamma \vdash (\phi \leftrightarrow \psi))$ is a correct sequent, then the sequent $(\Gamma \vdash (\phi \to \psi))$ and $(\Gamma \vdash (\psi \to \phi))$ are both correct.
+        
+        \item[b.] Sequent Rule $(\leftrightarrow I)$:\\
+        If the sequent $(\Gamma \vdash (\phi \to \psi))$ and $(\Gamma \vdash (\psi \to \phi))$ are both correct, then $(\Gamma \vdash (\phi \leftrightarrow \psi))$ is a correct sequent.
+    \end{enumerate}
+
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve (a), (e) and (f) in Exercise 2.6.1 in the textbook:
+
+Find natural deduction proofs for the following sequents (none of which need (RAA)):
+%
+\begin{enumerate}
+
+\item[(a)] $\vdash ( \neg ( \phi \wedge ( \neg \phi ) ) )$.
+
+\item[(e)] $\{ ( \phi \rightarrow \psi ) \} \vdash ( ( \neg \psi ) \rightarrow ( \neg \phi ) )$.
+
+\item[(f)] $\{ ( \phi \rightarrow \psi ) \} \vdash ( \neg ( \phi \wedge ( \neg \psi ) ) )$.
+
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}[Solution]\ 
+    \begin{enumerate}
+        \item[(a)]\ 
+            \begin{prooftree}
+                \AxiomC{$[(\phi \wedge (\neg \phi ))]^1$}
+                \RightLabel{$(\wedge E)$}
+                \UnaryInfC{$\phi$}
+                \AxiomC{$[(\phi \wedge (\neg \phi ))]^1$}
+                \RightLabel{$(\wedge E)$}
+                \UnaryInfC{$\neg \phi$}
+                \RightLabel{$(\neg E)$}
+                \BinaryInfC{$\bot$}
+                \RightLabel{$(\neg I)$,1}
+                \UnaryInfC{$(\neg(\phi \wedge (\neg \phi )))$}
+            \end{prooftree}
+        \item[(e)]\
+            \begin{prooftree}
+                \AxiomC{$[\neg \psi]^2$}
+                \AxiomC{$[\phi]^1$}
+                \AxiomC{$(\phi \to \psi)$}
+                \RightLabel{($\to I$)}
+                \BinaryInfC{$\psi$}
+                \RightLabel{$(\neg E)$}
+                \BinaryInfC{$\bot$}
+                \RightLabel{$(\neg I)$,1}
+                \UnaryInfC{$\neg (\phi)$}
+                \RightLabel{$(\to I)$,2}
+                \UnaryInfC{$( ( \neg \psi ) \rightarrow ( \neg \phi ) )$}
+            \end{prooftree}
+        \item[(f)]\ 
+            \begin{prooftree}
+                \AxiomC{$[\phi \wedge \neg \psi]^1$}
+                \RightLabel{$(\wedge E)$}
+                \UnaryInfC{$\phi$}
+                \AxiomC{$(\phi \to \psi)$}
+                \RightLabel{$(\to E)$}
+                \BinaryInfC{$\psi$}
+                \AxiomC{$[\phi \wedge \neg \psi]^1$}
+                \RightLabel{$(\wedge E)$}
+                \UnaryInfC{$\neg \psi$}
+                \RightLabel{$(\neg E)$}
+                \BinaryInfC{$\bot$}
+                \RightLabel{$(\neg I)$,1}
+                \UnaryInfC{$( \neg ( \phi \wedge ( \neg \psi ) ) )$}
+                
+            \end{prooftree}
+    \end{enumerate}
+
+\end{proof}
+%文档内容结束
+\end{document}

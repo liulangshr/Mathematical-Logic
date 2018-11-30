@@ -1,0 +1,286 @@
+%定义文档类型和基本的页面设置
+\documentclass[12pt,a4paper]{article}
+
+%加载要用到的宏包
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bussproofs}
+\usepackage{tikz}
+%\usepackage[left=1.5cm,right=1.5cm]{geometry}
+
+%自定义环境
+\theoremstyle{plain}
+\newtheorem{exercise}{Exercise}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+%文档的标题
+\title{Homework 8}
+
+%文档的作者
+\author{WEI Lai\\
+1801211383}
+
+%文档的日期
+\date{Deadline: 23:59, November 30th, 2018}
+
+%文档内容开始
+\begin{document}
+
+%打出文档的标题、作者、日期等信息
+\maketitle
+
+%Please do Exercises 3.3.10 (b), 3.4.6(b) and 3.4.6 (d) in the textbook and compare your solutions to those at the end of the book.
+
+%You do NOT need to hand in your solutions to the above exercises.
+
+In Exercises 1-3, we always use the signature $\sigma = \{ p_0 , p_1 , p_2 , \dots \}$, and thus we will omit it in the notations.
+Moreover, we only consider formulas using at most the truth function symbols $\neg$, $\wedge$ and $\bot$.
+
+In Exercises 1-3, we study the properties of special sets of formulas defined as follows:
+
+\begin{definition}
+A set $\Gamma$ of formula is a \emph{maximal consistent set}, if it satisfies both of the following conditions: 
+%
+\begin{enumerate}
+
+\item $\Gamma$ is syntactically consistent, i.e.\ $\Gamma \not \vdash \bot$.
+
+\item for each formula $\phi$, if $\phi \not \in \Gamma$, then $\Gamma \cup \{ \phi \}$ is \emph{not} syntactically consistent, i.e.\ $\Gamma \cup \{ \phi \} \vdash \bot$.
+\ \\ 
+
+\end{enumerate}
+\end{definition}
+
+
+\begin{exercise}
+Let $\Gamma$ be a maximal consistent set of formulas, and $\phi$ and $\psi$ two formulas.
+Please prove the following:
+%
+\begin{enumerate}
+
+\item If $\Gamma \vdash \phi$, then $\phi \in \Gamma$.
+
+\item $( \neg \phi ) \in \Gamma$, if and only if $\phi \not \in \Gamma$.
+
+\item $( \phi \wedge \psi ) \in \Gamma$, if and only if $\phi \in \Gamma$ and $\psi \in \Gamma$.
+
+\end{enumerate}  
+%
+(Hint: First, you do not need to use induction; second, you can use Exercise 3.4.6 without proof.)
+\end{exercise}
+
+\begin{proof}\
+	\begin{enumerate}
+    	\item
+        Assume that $\Gamma \vdash \phi$ and \(\phi \notin \Gamma\). Since \(\phi \notin \Gamma\), by definition of maximal consistent,  $\Gamma \cup \{ \phi \} \vdash \bot$ holds. Since $\Gamma \vdash \phi$, by 3.4.6(d), \(\Gamma \vdash \bot \) holds. It contradicts with  $\Gamma \not \vdash \bot$.
+    
+        \item
+        \begin{itemize}
+            \item[$\Rightarrow$] 
+            Assuem that $( \neg \phi ) \in \Gamma$ and $\phi \in \Gamma$. By 3.4.6(a), $\Gamma \vdash \neg \phi$ and $\Gamma \vdash \phi$ holds. Then $\Gamma \vdash \bot$ holds. It contradicts with  $\Gamma \not \vdash \bot$. 
+            \item[$\Leftarrow$]
+            Assume that $\phi \notin \Gamma$. By definition of maximal consistent,  $\Gamma \cup \{ \phi \} \vdash \bot$ holds. Then $\Gamma \cup \{ \phi \} \vdash \neg \phi$ holds. By 1, $\neg \phi \in \Gamma \cup \{ \phi \}$ holds. Then, $\neg \phi \in \Gamma $ holds.  
+        \end{itemize}
+        
+        \item
+        \begin{itemize}
+            \item[$\Rightarrow$] 
+            Assume that $(\phi \wedge \psi) \in \Gamma$. By 3.4.6(a), $\Gamma \vdash (\phi \wedge \psi)$. Thus, by $(\wedge I)$, $\Gamma \vdash \phi$ and $\Gamma \vdash \psi$ holds. By 1, $\phi \in \Gamma$ and $\psi \in \Gamma$ holds.
+            \item[$\Leftarrow$]
+            Assume that $\phi \in \Gamma$ and $\psi \in \Gamma$. By 3.4.6(a), $\Gamma \vdash \phi$ and $\Gamma \vdash \psi$ holds. Thus, by $(\wedge I)$, $\Gamma \vdash (\phi \wedge \psi)$ holds. By 1, $(\phi \wedge \psi) \in \Gamma$ holds.     
+        \end{itemize}
+	\end{enumerate}
+	
+\end{proof}
+
+\ \\
+\begin{exercise}
+In this exercise, we are going to prove that every maximal consistent set has a model.
+
+\ \\
+Let $\Gamma$ be a maximal consistent set of formulas and $A : \sigma \rightarrow \{ \text{T} , \text{F} \}$ be a structure such that, for each $p \in \sigma$,
+%
+\[
+A (p) = \left \{
+\begin{array}{ll}
+\text{T} , & \mbox{if } p \in \Gamma \\
+\text{F} , & \mbox{if } p \not \in \Gamma
+\end{array}
+\right.
+\]
+%
+Please prove that, for each formula $\phi$, $\phi \in \Gamma \Leftrightarrow A^* (\phi) = \text{T}$.
+\end{exercise}
+
+\begin{proof}\ \\
+    Let $\phi$ be an arbitrary formula s.t. $\phi \in \Gamma$. It is easy to show that $\bot \notin \Gamma$. We use induction on $\phi$.
+        \begin{itemize}
+            \item[\textbf{BS:}]
+                Assume that $\phi=p$.\\
+                $\phi \in \Gamma$, iff $p \in \Gamma$. \hfill By $\phi = p$ and $\phi \in \Gamma$.\\
+                \phantom{$\phi \in \Gamma$, }iff $A(p)=A^*(p)=A^*(\phi)=T$. \hfill By definition of $A(p)$.\\
+            
+            \item[\textbf{IH:}]
+                For each formula $\psi$ and $\chi$ , $\psi \in \Gamma \Leftrightarrow A^* (\psi) = \text{T}$ and $\chi \in \Gamma \Leftrightarrow A^* (\chi) = \text{T}$.
+            
+            \item[\textbf{IS:}]
+                \begin{itemize}
+                    \item \textbf{Case 1:} 
+                    Assume that $\phi= \neg \psi$.\\
+                    $\phi \in \Gamma$, iff $\neg \psi \in \Gamma$. \hfill By $\phi= \neg \psi$ and $\phi \in \Gamma$. \\
+                    \phantom{$\phi \in \Gamma$, }iff $\psi \notin \Gamma$. \hfill By Exercise 1.2.\\
+                    \phantom{$\phi \in \Gamma$, }iff $A^*(\psi)=F$. \hfill By IH.\\
+                    \phantom{$\phi \in \Gamma$, }iff $A^*(\neg \psi)=T$.\\
+                    \phantom{$\phi \in \Gamma$, }iff $A^*(\phi)=T$.
+                    
+                    \item \textbf{Case 2:}
+                    Assume that $\phi= \psi \wedge \chi$.\\
+                    $\phi \in \Gamma$, iff $\psi \wedge \chi \in \Gamma$. \hfill By $\phi= \psi \wedge \chi$ and $\phi \in \Gamma$. \\  
+                    \phantom{$\phi \in \Gamma$, }iff $\psi \in \Gamma$ and $\chi \in \Gamma$. \hfill By Exercise 1.3.\\ 
+                    \phantom{$\phi \in \Gamma$, }iff $A^*(\psi)=T$ and $A^*(\chi)=T$. \hfill By IH.\\
+                    \phantom{$\phi \in \Gamma$, }iff $A^*(\psi \wedge \chi)=T$.\\
+                    \phantom{$\phi \in \Gamma$, }iff $A^*(\phi)=T$.
+                \end{itemize}
+        \end{itemize}
+    This finishes the proof by induction.
+\end{proof}
+
+\ \\
+\begin{exercise}
+In this exercise, we are going to prove that every syntactically consistent set is a subset of some maximal consistent set.
+
+This result is called \textbf{Lindenbaum's Lemma}.
+
+\ \\ 
+Let $\Gamma$ be a syntactically consistent set and $f : \mathbb{N} \rightarrow Form$ a bijection.
+For convenience, we write $\phi_n$ for $f (n)$, for each $n \in \mathbb{N}$.
+We define a sequence of formulas $\{ \Gamma_i \mid i \in \mathbb{N} \}$ as follows:
+%
+\begin{enumerate}
+
+\item $\Gamma_0 = \Gamma$,
+
+\item $
+\Gamma_{i+1} = \left \{ 
+\begin{array}{ll}
+\Gamma_i \cup \{ \phi_i \} , & \mbox{if } \Gamma_i \cup \{ \phi_i \} \not \vdash \bot \\
+\Gamma_i , & \mbox{if } \Gamma_i \cup \{ \phi_i \} \vdash \bot 
+\end{array}
+\right.
+$
+\end{enumerate}
+%
+Please prove the following:
+%
+\begin{enumerate}
+
+\item For each $n \in \mathbb{N}$, $\Gamma_n$ is syntactically consistent.
+
+\item $\Delta = \bigcup \{ \Gamma_i \mid i \in \mathbb{N} \}$ is a maximal consistent set.
+
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}\
+\begin{enumerate}
+    \item
+    We use induction on $i$ s.t. $i \in \mathbb{N}$.
+        \begin{itemize}
+        
+        \item[\textbf{BS:}]
+            Suppose that $i=1$. Since $\Gamma_0 = \Gamma$ and $\Gamma$ is syntactically consistent, $\Gamma_0$ is syntactically consistent.
+            
+        \item[\textbf{IH:}]
+            $\Gamma_i$ is syntactically consistent.
+            
+        \item[\textbf{IS:}]
+                \begin{itemize}
+                    \item \textbf{Case 1:} $\Gamma_i \cup \{\phi_i\} \vdash \bot $ holds.\\
+                    Since $\Gamma_i \cup \{\phi_i\}\vdash \bot $, $\Gamma_{i+1}=\Gamma_i$ holds. By IH, $\Gamma_i$ is syntactically consistent. Then, $\Gamma_{i+1}$ is syntactically consistent.
+                    
+                    \item \textbf{Case 2:} $\Gamma_i \cup \{\phi_i\}  \not \vdash \bot $ holds.\\
+                    Since $\Gamma_i \cup \{\phi_i\}  \not \vdash \bot $, $\Gamma_{i+1}=\Gamma_i \cup \{\phi_i\}$ and $\Gamma_i \cup \{\phi_i\}$ is syntactically consistent holds. Thus, $\Gamma_{i+1}$ is syntactically consistent.  
+                \end{itemize}
+        \end{itemize}   
+    This finishes the proof by induction.
+    
+    \item
+        \begin{enumerate}
+            \item 
+            We show that $\Delta$ is syntactically consistent.
+            
+            Suppose that $\Delta$ is not syntactically consistent, i.e. $\Delta \vdash \bot$.\\
+            Since a derivation is finite, there must be a set $\Delta_0$ s.t. $\Delta_0 \subseteq \Delta$ and $\Delta_0 \vdash \bot$, i.e. $\Delta_0$ is not syntactically consistent.\\
+            We choose $i$ s.t. $i=max\{j \vert \phi_j \in \Delta_0\}$.\\
+            By definition of $\Gamma_n$, $\Delta_0 \subseteq \Gamma_i$ holds.\\
+            Since $\Delta_0$ is not syntactically consistent, $\Gamma_i$ is not syntactically consistent. 
+            By 1, $\Gamma_i$ is syntactically consistent. Contradiction!
+            Thus, $\Delta$ is syntactically consistent.
+            
+            \item
+            We show that for every forluma $\phi _i$, if $\phi_i \not \in \Delta$, then $\Delta \cup \{ \phi_i \}$ is not syntactically consistent, i.e.\ $\Delta \cup \{ \phi_i \} \vdash \bot$.
+            
+            Suppose that $\phi_i \not \in \Delta$ and $\Delta \cup \{ \phi_i \} \not \vdash \bot$.\\
+            Since $\Delta \cup \{ \phi_i \} \not \vdash \bot$, $\Gamma_i \cup \{ \phi_i \} \not \vdash \bot$ holds. Because it is easy to show that if a set is syntactically consistent, then all of its subsets are syntactically consistent.\\
+            By definition of $\Gamma_n$, $\Gamma_{i+1}=\Gamma_i \cup \{ \phi_i \}$ holds.\\
+            Thus, $\phi_i \in \Gamma_{i+1}$ holds.\\
+            Thus, $\phi_i \in \Delta$ holds. It contradicts with $\phi_i \not \in \Delta$.\\
+            Therefore, if $\phi_i \not \in \Delta$, then $\Delta \cup \{ \phi_i \}$ is not syntactically consistent.
+        \end{enumerate}
+    Therefore, $\Delta$ is a maximal consistent set.
+    
+\end{enumerate}
+\end{proof}
+
+\ \\
+\begin{exercise}
+This exercise is about Hilbert-style calculus of propositional logic.
+%
+\begin{enumerate}
+
+\item Please give a deduction which proves the sequent 
+%
+\[
+\{ p , ( q \rightarrow ( p \rightarrow r )) \} \vdash^H ( q \rightarrow r )
+\] 
+
+\item Please prove the following sequent using the Deduction Theorem:
+%
+\[
+\vdash^H ( ( \neg p ) \rightarrow ( p \rightarrow q ) )
+\]
+
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}\
+\begin{enumerate}
+    \item 
+        \begin{enumerate}
+            \item $(p \to (q \to p))$ \hfill Instance of (A1)
+            \item $p$ 
+            \item $(q \to p)$ \hfill (a),(b) MP
+            \item $((q \to (p \to r)) \to ((q \to p)(q \to r)))$ \hfill Instance of (A2)
+            \item $(q \to (p \to r))$
+            \item $((q \to p) \to (q \to r))$ \hfill (d),(e) MP
+            \item $(q \to r)$ \hfill (f),(c) MP
+        \end{enumerate}
+        
+    \item
+        \begin{enumerate}
+            \item $((\neg p) \to ((\neg q) \to (\neg p)))$ \hfill Instance of (A1)
+            \item $(\neg p)$
+            \item $((\neg q) \to (\neg p))$ \hfill (a),(b) MP
+            \item $(((\neg q) \to (\neg p)) \to (p \to q))$ \hfill Instance of (A3)
+            \item $(p \to q)$ \hfill (d),(c) MP
+        \end{enumerate}
+        Thus, $\{(\neg p)\} \vdash_H (p \to q)$ holds. By Deduction Theorem, \[ \vdash^H ( ( \neg p ) \rightarrow ( p \rightarrow q ) ) \] holds.
+\end{enumerate}
+\end{proof}
+
+%文档内容结束
+\end{document}

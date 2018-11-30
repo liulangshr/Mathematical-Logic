@@ -1,0 +1,293 @@
+%定义文档类型和基本的页面设置
+\documentclass[12pt,a4paper]{article}
+
+%加载要用到的宏包
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bussproofs}
+\usepackage{tikz}
+\usepackage[left=1.5cm,right=1.5cm]{geometry}
+
+%自定义环境
+\theoremstyle{plain}
+\newtheorem{exercise}{Exercise}
+
+%文档的标题
+\title{Homework 6}
+
+%文档的作者
+\author{(Please write your name here)\\
+(Please write your student number here)}
+
+%文档的日期
+\date{Deadline: 23:59, November 15th, 2018}
+
+%文档内容开始
+\begin{document}
+
+%打出文档的标题、作者、日期等信息
+\maketitle
+
+%Please do Exercises 3.3.10 (b), 3.4.6(b) and 3.4.6 (d) in the textbook and compare your solutions to those at the end of the book.
+
+%You do NOT need to hand in your solutions to the above exercises.
+
+\begin{exercise}
+Please write out truth tables for the formulas in the following list.
+Then, for each of these formulas, please say whether it is (a) a tautology, (b) a contradiction, (c) satisfiable. 
+(It can be more than one of these.)
+%
+\begin{itemize}
+
+\item[(a)] $( ( ( \neg p ) \rightarrow q ) \rightarrow ( p \rightarrow ( \neg q ) ) )$.
+
+\item[(b)] $( p \rightarrow ( ( \neg p ) \rightarrow q ) )$.
+
+\item[(c)] $( ( \neg p ) \leftrightarrow p )$.
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}
+For (a):
+\begin{center}
+\begin{tabular}{cc||rlclcrcrl}
+$p$ & $q$ & $( ( ( \neg$ & $p )$ & $\rightarrow$ & $q )$ & $\rightarrow$ & $( p$ & $\rightarrow$ & $( \neg$ &  $q ) ) )$ \\
+\hline
+T & T & F & T & T & T & F & T & F & F & T \\
+T & F & F & T & T & F & T & T & T & T & F \\
+F & T & T & F & T & T & T & F & T & F & T \\
+F & F & T & F & F & F & T & F & T & T & F \\
+  &   &  &   &  &   & $\Uparrow$ & &  & & 
+\end{tabular}
+\end{center}
+%
+Therefore, $( ( ( \neg p ) \rightarrow q ) \rightarrow ( p \rightarrow ( \neg q ) ) )$ is satisfiable.
+
+\ \\
+For (b):
+\begin{center}
+\begin{tabular}{cc||rcrlcl}
+$p$ & $q$ & $( p$ & $\rightarrow$ & $( ( \neg$ & $p )$ & $\rightarrow$ &  $q ) )$ \\
+\hline
+T & T & T & T & F & T & T & T \\
+T & F & T & T & F & T & T & F \\
+F & T & F & T & T & F & T & T \\
+F & F & F & T & T & F & F & F \\
+  &   &  & $\Uparrow$  &  &   &  & 
+\end{tabular}
+\end{center}
+%
+Therefore, $( p \rightarrow ( ( \neg p ) \rightarrow q ) )$ is a tautology.
+
+\ \\
+For (c):
+\begin{center}
+\begin{tabular}{c||rlcl}
+$p$ & $( ( \neg$ & $p )$ & $\leftrightarrow$ & $p )$ \\
+\hline
+T & F & T & F & T \\
+F & T & F & F & F \\
+& & & $\Uparrow$ &
+\end{tabular}
+\end{center} 
+%
+Therefore, $( ( \neg p ) \rightarrow p )$ is a contradiction.
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please prove the following by truth tables:
+%
+\begin{itemize}
+
+\item[(a)] $( p_1 \vee ( p_2 \wedge p_3 ) )$ eq $( ( p_1 \vee p_2 ) \wedge ( p_1 \vee p_3 ) )$
+
+\item[(b)] $( \neg ( p_1 \vee p_2 ) )$ eq $( ( \neg p_1 ) \wedge ( \neg p_2 ) )$
+
+\item[(c)] $( p \rightarrow q )$ eq $( ( \neg p ) \vee q )$
+
+\item[(d)] $( p \rightarrow q )$ eq $( \neg ( p \wedge ( \neg q ) ) )$
+
+\item[(e)] $( \neg ( p_1 \leftrightarrow p_2 ) )$ eq $( ( \neg p_1 ) \leftrightarrow p_2 )$
+
+\end{itemize} 
+\end{exercise}
+
+\begin{proof}
+For (a):
+%
+\begin{center}
+\begin{tabular}{ccc||rcrcl|rclcrcl}
+$p_1$ & $p_2$ & $p_3$ & $( p_1$ & $\vee$ & $( p_2$ & $\wedge$ & $p_3 ) )$ & $( ( p_1$ & $\vee$ & $p_2 )$ & $\wedge$ & $( p_1$ & $\vee$ & $p_3 ) )$ \\
+\hline
+T & T & T & T & T & T & T & T & T & T & T & T & T & T & T \\
+T & T & F & T & T & T & F & F & T & T & T & T & T & T & F \\
+T & F & T & T & T & F & F & T & T & T & F & T & T & T & T \\
+T & F & F & T & T & F & F & F & T & T & F & T & T & T & F \\
+F & T & T & F & T & T & T & T & F & T & T & T & F & T & T \\
+F & T & F & F & F & T & F & F & F & T & T & F & F & F & F \\
+F & F & T & F & F & F & F & T & F & F & F & F & F & F & T \\
+F & F & F & F & F & F & F & F & F & F & F & F & F & F & F \\
+  &   &   &  & $\Uparrow$ & & & &  &  &  & $\Uparrow$ & & &
+\end{tabular}
+\end{center}
+
+For (b):
+%
+\begin{center}
+\begin{tabular}{cc||rrcl|rlcrl}
+$p_1$ & $p_2$ & $( \neg$ & $( p_1$ & $\vee$ & $p_2 ) )$ & $(( \neg$ & $p_1 )$ & $\wedge$ & $( \neg$ & $p_2 ) )$ \\
+\hline
+T & T & F & T & T & T & F& T & F & F & T \\
+T & F & F & T & T & F & F& T & F & T & F \\
+F & T & F & F & T & T & T& F & F & F & T \\
+F & F & T & F & F & F & T& F & T & T & F \\
+  &   & $\Uparrow$ &  &  &  &  &  & $\Uparrow$ &  &
+\end{tabular}
+\end{center}
+
+For (c):
+%
+\begin{center}
+\begin{tabular}{cc||rcl|rlcl}
+$p$ & $q$ & $( p$ & $\rightarrow$ & $q )$ & $(( \neg$ & $p )$ & $\vee$ & $q )$ \\
+\hline
+T & T & T & T & T & F & T & T & T \\
+T & F & T & F & F & F & T & F & F \\
+F & T & F & T & T & T & F & T & T \\
+F & F & F & T & F & T & F & T & F \\
+  &   &  & $\Uparrow$ & &  &  & $\Uparrow$ & 
+\end{tabular}
+\end{center}
+
+For (d):
+%
+\begin{center}
+\begin{tabular}{cc||rcl|rrcrl}
+$p$ & $q$ & $( p$ & $\rightarrow$ & $q )$ & $( \neg$ & $( p$ & $\wedge$ & $( \neg$ & $q )))$ \\
+\hline
+T & T & T & T & T & T & T & F & F & T \\
+T & F & T & F & F & F & T & T & T & F \\
+F & T & F & T & T & T & F & F & F & T \\
+F & F & F & T & F & T & F & F & T & F \\
+  &   &  & $\Uparrow$ & & $\Uparrow$ &  &  &  &
+\end{tabular}
+\end{center}
+
+For (e):
+%
+\begin{center}
+\begin{tabular}{cc||rrcl|rlcl}
+$p_1$ & $p_2$ & $( \neg$ & $( p_1$ & $\leftrightarrow$ & $p_2 ))$ & $(( \neg$ & $p_1)$ & $\leftrightarrow$ & $p_2 )$ \\
+\hline
+T & T & F & T & T & T & F & T & F & T \\
+T & F & T & T & F & F & F & T & T & F \\
+F & T & T & F & F & T & T & F & T & T \\
+F & F & F & F & T & F & T & F & F & F \\
+  &   & $\Uparrow$ &  &  & & & & $\Uparrow$ &
+\end{tabular}
+\end{center}
+\end{proof}
+
+\begin{exercise}
+Please prove the following version of Lemma 3.5.10:
+
+\ \\
+Let $\sigma$ and $\tau$ be signatures, $A$ and $B$ a $\sigma$-structure and a $\tau$-structure respectively. 
+The following are equivalent:
+%
+\begin{itemize}
+
+\item[(i)] $A(p) = B(p)$ holds for every propositional symbol $p \in \sigma \cap \tau$;
+
+\item[(ii)] for each formula $\phi$ of LP($\sigma \cap \tau$), $A^* (\phi) = B^* (\phi)$. 
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}\
+    \begin{enumerate}
+        \item\ 
+            $(i) \Rightarrow (ii)$\\
+            Let $\phi$ be an arbitrary formula of $LP(\sigma \cap \tau)$, and $\{p_1,p_2,..p_n\}$ be the set of all the propositional symbols in $\phi$.\\
+            Obviously, for each $p$ s.t. $p \in P$, $p \in \sigma \cap \tau holds$.\\
+            Then, for for each $p$ s.t. $p \in P$, $A(p) = B(p)$ holds.\\
+            
+    \end{enumerate}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 3.7.1 in the textbook:
+
+\ \\
+Carry out the following substitutions.
+%
+\begin{itemize}
+
+\item[(a)] $( p \rightarrow q)[p/q]$.
+
+\item[(b)] $( p \rightarrow q)[p/q][q/p]$.
+
+\item[(c)] $(p \rightarrow q)[p/q, q/p]$.
+
+\item[(d)] $( r \wedge (p \vee q))[((t \rightarrow ( \neg p)) \vee q)/p, ( \neg ( \neg q))/q, (q \leftrightarrow p)/s]$.
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}[Solution]
+(Please write your solution here.)
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 3.7.2 (a) and (b) in the textbook:
+
+\begin{itemize}
+
+\item[(a)] Using one of the De Morgan Laws (Example 3.6.5), show how the following equivalences follow from the Replacement and Substitution Theorems:
+%
+\begin{align*}
+( \neg ( ( p_1 \wedge p_2 ) \wedge p_3 ) ) \ &\text{eq} \ (( \neg ( p_1 \wedge p_2)) \vee (\neg p_3)) \\
+&\text{eq}\ ((( \neg p_1) \vee ( \neg p_2)) \vee ( \neg p_3))
+\end{align*}
+
+\item[(b)] Show the following generalised De Morgan Law, by induction on $n$:
+If $\phi_1 , \dots , \phi_n$ are any formulas then
+%
+\[
+( \neg ( \dots ( \phi_1 \wedge \phi_2 ) \wedge \dots ) \wedge \phi_n )) \ \text{eq} \ ( \dots (( \neg \phi_1 ) \vee ( \neg \phi_2 ) ) \vee \dots ) \vee ( \neg \phi_n ))
+\]
+%
+(And note that by the other De Morgan Law, the same goes with
+$\wedge$ and $\vee$ the other way round.)
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}
+(Please write your solution here.)
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 3.7.6 in the textbook: (First, you may get some inspiration from (b) of Exercise 4 above.
+Second, for simplicity, we may assume that we are working with a fixed signature $\sigma$ so that every formula that we discuss is a formula of LP($\sigma$), all of $S$, $T$ and the $U$ that you're going to define are \emph{total} functions on $\sigma$ and the formulas in the ranges of $S$, $T$ and $U$ are formulas of LP($\sigma$).
+Please note that $S (p) = p$ means that we do not change $p$ when carrying out a substitution.)
+
+\ \\
+Suppose $S$ and $T$ are substitutions. 
+Show that there is a substitution $U$ such that for every formula $\phi$, $\phi [U] = \phi [S] [T]$.
+\end{exercise}
+
+\begin{proof}
+(Please write your proof here.)
+\end{proof}
+
+%文档内容结束
+\end{document}

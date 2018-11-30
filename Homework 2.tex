@@ -1,0 +1,277 @@
+%定义文档类型和基本的页面设置
+\documentclass[12pt,a4paper,utf8]{article}
+
+%加载要用到的宏包
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+%自定义环境
+\theoremstyle{plain}
+\newtheorem{exercise}{Exercise}
+
+%文档的标题
+\title{Homework 2}
+
+%文档的作者
+\author{Wei Lai\\
+1801211383}
+
+%文档的日期
+\date{Deadline: 23:59, October 18th, 2018}
+
+%文档内容开始
+\begin{document}
+
+%打出文档的标题、作者、日期等信息
+\maketitle
+
+\begin{exercise}
+Let $A = \{ p , q \}$ and $B = \{ 0 , 1 \}$.
+There are 16 relations between $A$ and $B$; in other words, there are 16 subsets of the set $A \times B$.
+Among these relations, some of them are functions and the others are not.
+Please write out those relations which are functions.
+\end{exercise}
+
+\begin{proof}[Solution]\ \\
+    All the substes of $A \times B$ :
+
+$\emptyset$,
+$\{\langle p,0 \rangle \}$, 
+$\{\langle p,1 \rangle \}$, 
+$\{\langle q,0 \rangle \}$, 
+$\{\langle q,1 \rangle \}$, 
+$\{\langle p,0 \rangle , \langle p,1 \rangle \}$,
+$\{\langle p,0 \rangle , \langle q,0 \rangle \}$,
+$\{\langle p,0 \rangle , \langle q,1 \rangle \}$,
+$\{\langle p,1 \rangle , \langle q,0 \rangle \}$,
+$\{\langle p,1 \rangle , \langle q,1 \rangle \}$,
+$\{\langle q,0 \rangle , \langle q,1 \rangle \}$,
+$\{\langle p,0 \rangle , \langle p,1 \rangle , \langle q,0 \rangle \}$,
+$\{\langle p,0 \rangle , \langle p,1 \rangle , \langle q,1 \rangle \}$,
+$\{\langle p,0 \rangle , \langle q,0 \rangle , \langle q,1 \rangle \}$,
+$\{\langle p,1 \rangle , \langle q,0 \rangle , \langle q,1 \rangle \}$,
+$\{\langle p,0 \rangle , \langle p,1 \rangle , \langle q,0 \rangle , \langle q,1 \rangle \}$.
+
+Functions:
+$\emptyset$,
+$\{\langle p,0 \rangle \}$,
+$\{\langle p,1 \rangle \}$, 
+$\{\langle q,0 \rangle \}$, 
+$\{\langle q,1 \rangle \}$, 
+$\{\langle p,0 \rangle , \langle q,0 \rangle \}$,
+$\{\langle p,0 \rangle , \langle q,1 \rangle \}$,
+$\{\langle p,1 \rangle , \langle q,0 \rangle \}$,
+$\{\langle p,1 \rangle , \langle q,1 \rangle \}$,
+
+
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please prove that a set $A$ is a relation, if and only if $A \subseteq dom A \times ran A$.
+\end{exercise}
+
+\begin{proof}\ 
+\begin{enumerate}
+    \item[a.] $\Rightarrow\ $
+    
+    Assuem $A$ is a relation.
+    Then, by the definition of domain and range, for every $\langle x,y \rangle \in A$, $x \in domA\ and\ y \in ranA$.
+
+    Thus, by the definition of cartesian product, $\langle x,y \rangle \in domA \times ranA$.
+    
+    Therefore, $A \subseteq domA \times ranA $.
+    
+    \item[b.]\ $\Leftarrow $
+
+    Assume $A \subseteq domA \times ranA $.
+    
+    Then, for every $X \in A$, $X \in domA \times ranA\ $
+    
+    Thus, by the definition of cartisian product, $X=\langle x,y \rangle\ such\ that\ x \in domA\ and\ y \in ranA$.
+    
+    Therefore, every element of $A$ is an ordered pair. A is a relation.
+\end{enumerate}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Let $F$ be a function from $A$ to $B$ and $G$ be a function from  $B$ to $C$.
+Please prove the following:
+%
+\begin{enumerate}
+
+\item $G \circ F$ is a function from $A$ to $C$.
+
+\item If both $F$ and $G$ are injections, then $G \circ F$ is an injection.
+
+\item If both $F$ and $G$ are surjections, then $G \circ F$ is a surjection.
+
+\end{enumerate} 
+\end{exercise}
+
+\begin{proof}\
+    \begin{enumerate}
+       
+        \item 
+        By the definition of composition, $dom G \circ F \subseteq domF$ and $ran G \circ F \subseteq ranG$.
+        
+        By the definition of function, $domF \subseteq A$ and $ran G \subseteq C$.
+        
+        Then, $dom G \circ F \subseteq A$ and $ran G \circ F \subseteq C$.
+        
+        By the definition of function, $G \circ F$ is a function from $A$ to $C$.
+        
+        \item
+        Asuume that $G \circ F$ is not an injection. 
+        
+        By definition of injection, there are two elements $\langle x,z \rangle \in G \circ F$, $\langle x',z \rangle \in G \circ F$ such that $x \neq x'$.
+        
+        Consider the value of $F(x)=y$ and $F(x')=y'$.
+        
+        Since $F$ is an injection, $y \neq y'$ holds.
+        
+        By definition of composition, $y \in domG$ and $y' \in domG$. In the meantime, $G(y)=z$ and $G(y')=z$.
+        
+        Now consider the value of $G(y)=z$ and $G(y')=z$.
+        
+        Since $G$ is an injection, $z \neq z$. Contradiction!
+        
+        Therefore, $G \circ F$ is an injection. 
+        
+        \item
+        Since $G \circ F$ is a function form $A$ to $C$, $ranG\circ F \subseteq C$ holds.
+        
+        Assume $G \circ F$ is not a surjection.
+        
+        Then $ranG\circ F \neq C$ holds. 
+        
+        Then, there is a $z$ such that $z \in C$ and $z \notin ranG\circ F$.
+        
+        Given that $G$ is a surjection from $B$ to $C$, we have $ranG= C$. Then, there is a $z$ such that $z \in ranG$ and $z \notin ranG\circ F$. Let $c$ be that $z$.
+        
+        a) From $c \in ranG$, we can infer that, there is a $y$ such that $y \in B$ and $\langle y,c \rangle \in G$.
+        
+        b) From $c \notin ranG\circ F$, we can infer that, for every $x \in domF$, $\langle x,c \rangle \notin G \circ F$. 
+        
+        From a) and b) we can infer, for every $y$ such that $y \in B$ and $\langle y,c \rangle \in G $, there is not a $x$ such that $x \in domF$ and $\langle x,y \rangle \in F$.
+        
+        Given that $F$ is a surjection, we have for every $y \in B$, there is a $x$ such that $x \in domF$ and $\langle x,y \rangle \in F$.
+        
+        Contradiction!
+        
+        Therefore, $G \circ F$ is a surjection.
+    \end{enumerate}
+
+\end{proof}
+
+\ \\
+\begin{exercise}
+Let $A$ be a set and $R \subseteq A \times A$ be an equivalence relation.
+Usually, for any $a , b \in A$, we write $aRb$ for $\langle a , b \rangle \in R$.
+For each $a \in A$, define $[a]$ to be $\{ b \in A \mid aRb \}$.
+Please prove the following:
+%
+\begin{enumerate}
+
+\item For any $a , b \in A$, $[a] = [b]$, if and only if $aRb$.
+
+\item For any $a , b \in A$, if $[a] \neq [b]$, then $[a] \cap [b] = \emptyset$.
+
+\item $A = \bigcup \{ [a] \mid a \in A \}$.
+
+\item Let $F$ be a function from $A$ to $A$ such that, for any $a , b \in A$, if $a R b$ then $F (a) R F (b)$. 
+Prove that $\widehat{F}$, defined to be $\{ \langle [a] , [F(a)] \rangle \mid a \in A \}$, is a function.
+
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}\
+    \begin{enumerate}
+        \item 
+        \begin{enumerate}
+            \item
+            
+            $\Rightarrow$
+            
+            Let $x$ be an arbitrary object. Assume that $[a]=[b]$ and $x \in [a]$.
+            
+            Then, $x \in [b]$.
+            
+            Since $x \in [a]$ and $x \in [b]$, $aRx$ and $bRx$ holds.
+            
+            Given that $R$ is symmetrical, $aRx$ and $xRb$ holds.
+            
+            Since $R$ is transitive, $aRb$ holds. 
+            
+            \item 
+            
+            $\Leftarrow$
+            
+            Let $x$ be an arbitrary object.
+            
+            Assume that $aRb$ and $x \in [a]$.
+            
+            Then $aRx$ holds. And since $R$ is symmetrical, $bRa$ holds.
+            
+            Since $R$ is transitive, $bRx$ holds.
+            
+            Thus, $x \in [b]$ holds. 
+            
+            Therefore, $[a] \subseteq [b]$.
+            
+            Similarly, we can prove $[b] \subseteq [a]$.
+            
+            Therefore, $[a]=[b]$.
+        \end{enumerate}
+        
+        \item
+        Assume that $[a] \cap [b] \neq \emptyset$.
+        
+        Then there is a $x$ such that $x \in [a]$ and $x \in [b]$.
+        
+        Then $aRx$ and $bRx$ holds.
+        
+        Since $R$ is symmetrical and transitive. $aRb$ holds.
+        
+        From 1. we can infer than $[a]=[b]$.
+        
+        Therefore, for any $a , b \in A$, if $[a] \neq [b]$, then $[a] \cap [b] = \emptyset$. 
+        
+        \item
+        Let $a$ be an arbitrary object.
+        
+        $a \in A$ iff $aRa$
+        
+        $a \in A$ iff $a \in [a]$
+        
+        $a \in A$ iff there is a set $X$ such that $X \subseteq[a]$ and $a \in X$
+        
+        $a \in A$ iff $a \in \bigcup \{[a] \mid a \in A \}$
+        
+        Therefore, $A=\bigcup \{[a] \mid a \in A \}$.
+        
+        \item
+        Assume that $\langle [a],[F(a)]\rangle \in \widehat{F}$ and $\langle [b],[F(b)]\rangle\in \widehat{F}$. We prove that if $[a]=[b]$, then $[F(a)]=[F(b)]$.
+        
+        If $[a]=[b]$, form 1. we have $aRb$.
+        
+        From if $a R b$ then $F (a) R F (b)$, $F (a) R F (b)$
+        holds.
+        
+        From 1. we have $[F(a)]=[F(b)]$.
+        
+        Then, we have proved that if $\langle [a],[F(a)]\rangle \in \widehat{F}$ and $\langle [s],[F(b)]\rangle\in \widehat{F}$, then $[F(a)]=[F(b)]$.
+        
+        Thus, $\widehat{F}$ is a function.
+        
+        
+        
+    \end{enumerate}
+\end{proof}
+
+%文档内容结束
+\end{document}

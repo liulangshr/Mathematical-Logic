@@ -1,0 +1,360 @@
+%定义文档类型和基本的页面设置
+\documentclass[12pt,a4paper]{article}
+
+%加载要用到的宏包
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bussproofs}
+\usepackage{tikz}
+%\usepackage[left=1.5cm,right=1.5cm]{geometry}
+
+%自定义环境
+\theoremstyle{plain}
+\newtheorem{exercise}{Exercise}
+
+%文档的标题
+\title{Homework 7}
+
+%文档的作者
+\author{WEI Lai\\
+1801211383}
+
+%文档的日期
+\date{Deadline: 23:59, November 22th, 2018}
+
+%文档内容开始
+\begin{document}
+
+%打出文档的标题、作者、日期等信息
+\maketitle
+
+%Please do Exercises 3.3.10 (b), 3.4.6(b) and 3.4.6 (d) in the textbook and compare your solutions to those at the end of the book.
+
+%You do NOT need to hand in your solutions to the above exercises.
+
+\begin{exercise}
+Please solve Exercise 3.8.1 (a) and (d) in the textbook. 
+(You just need to write down the formulas; you do NOT need to show that these formulas have the required properties.)
+
+\ \\
+For each of the following formulas $\phi$, find a formula $\phi^{DNF}$ in DNF, and a formula $\phi^{CNF}$ in CNF, which are both equivalent to $\phi$.
+%
+\begin{itemize}
+
+\item[(a)] $( \neg ( p_1 \rightarrow p_2 ) ) \vee ( \neg ( p_2 \rightarrow p_1 ) )$.
+
+\item[(d)] $( \neg ( p_1 \wedge p_2 ) ) \rightarrow ( p_1 \leftrightarrow p_0 )$.
+
+\end{itemize}
+\end{exercise}
+
+\begin{proof}[Solution]\
+    \begin{itemize}
+        \item[(a)]
+            DNF: $(p_1 \wedge \neg p_2)\vee(p_2 \wedge \neg_1)$\\
+            CNF: $(p_1 \vee p_2)\wedge (\neg p_1 \vee \neg p_2)$
+        \item[(d)]
+            DNF: $(\neg p_0 \wedge \neg p_1 \wedge \neg p_2) \vee (\neg p_0 \wedge \neg p_1 \wedge p_2) \vee (\neg p_0 \wedge p_1 \wedge p_2) \vee (p_0 \wedge p_1 \wedge \neg p_2) \vee (p_0 \wedge p_1 \wedge p_2)$\\
+            CNF: $(p_0 \vee \neg p_1 \vee p_2) \wedge (\neg p_0 \vee p_1 \vee p_2) \wedge (\neg p_0 \vee p_1 \vee \neg p_2) $
+           
+    \end{itemize}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 3.8.6 in the textbook following the guide below:
+
+\ \\
+Fixing a non-empty signature $\sigma$ and $p_0 \in \sigma$, we define a function $f : Form (\sigma) \rightarrow Form (\sigma)$ recursively as follows:
+%
+\begin{align*}
+f (p) &= p \mbox{, for each } p \in \sigma \\
+f (\bot) &= ( p_0 \wedge ( \neg p_0 ) ) \\
+f ((\neg \phi)) &= ( \neg f ( \phi ) ) \\
+f ((\phi \wedge \psi)) &=  ( \neg ( f (\phi) \rightarrow ( \neg f (\psi) ) ) ) \\
+f ((\phi \vee \psi)) &= ( ( \neg f (\phi) ) \rightarrow f (\psi) ) \\
+f ((\phi \rightarrow \psi)) &= ( f (\phi) \rightarrow f (\psi) ) \\
+f ((\phi \leftrightarrow \psi)) &= ( \neg ( ( f (\phi) \rightarrow f (\psi) ) \rightarrow ( \neg ( f (\psi) \rightarrow f (\phi) ) ) ) )
+\end{align*}
+%
+Please prove that, for each formula $\phi$, $\phi$ eq $f (\phi)$ and in $f (\phi)$ no truth function symbols are used except $\rightarrow$ and $\neg$.
+(In the induction step, you do NOT need to write out all cases.
+Just write out the cases for $\neg$ and $\wedge$ as examples.)
+\end{exercise}
+
+\begin{proof}\ \\
+Suppose $\phi$ is an arbitrary formula of $LP(\sigma)$. We use induction on $\phi$.
+        \begin{itemize}
+            \item[\textbf{BS:}]
+                \begin{enumerate}
+                    \item 
+                        Suppose that $\phi = p$, by the definition of $f(\phi)$:\\
+                        $f(\phi)=f(p)=p$\\
+                        Clearly, $\phi$ is equivalent to $f(\phi)$. Since $p$ is propositional symbol, $f(\phi)$ does not have any truth function symbols except $\rightarrow$ and $\neg$.
+                    \item
+                        Suppose that $\phi = \bot$, by the definition of $f(\phi)$:\\
+                        $f(\phi)=f(\bot)=(p_0\wedge (\neg p_0))$\\
+                        Since for every $\sigma$-strucrure $A$, $A^*(\bot)=A^*((p_0\wedge (\neg p_0)))=F$, $\phi$ is equivalent to $f(\phi)$. Since $p_0$ is propositional symbol, $f(\phi)$ does not have any truth function symbols except $\rightarrow$ and $\neg$.
+                 \end{enumerate}
+            \item[\textbf{IH:}]
+                \begin{enumerate}
+                    \item 
+                        $\phi_0$ is equivalent to $f(\phi_0)$ and $\phi_1$ is equivalent to $f(\phi_1)$.
+                    \item
+                        $f(\phi_0)$ and $f(\phi_1)$ do not have any truth function symbols except $\rightarrow$ and $\neg$.
+                \end{enumerate}
+                etc.
+               
+            \item[\textbf{IS:}]
+                \begin{enumerate}
+                    \item 
+                        \begin{enumerate}
+                            \item 
+                                Suppose $\phi=\neg (\phi_0)$.\\
+                                By IH, $\phi_0$ is equivalent to $f(\phi_0)$.\\
+                                Since $\phi_0$ is equivalent to $f(\phi_0)$, obviously, $\neg (\phi_0)$ is equivalent to $\neg f(\phi_0)$.\\ 
+                                By the definition of $f(\phi)$, $f(\phi)=f(\neg (\phi_0))=\neg f(\phi_0)$.\\
+                                Thus, $\phi $ is equivalent to $f(\phi)$.
+                            \item
+                                By IH, $f(\phi_o)$ does not  have any truth function symbols except $\rightarrow$ and $\neg$.\\
+                                Since $f((\neg(\phi_0)))=\neg(f(\phi_0))$, clearly, $f((\neg(\phi_0)))$ does not have any truth function symbols except $\rightarrow$ and $\neg$.
+                        \end{enumerate}
+                    \item
+                        \begin{enumerate}
+                            \item 
+                                Suppose $\phi=(\phi_0 \wedge \phi_1)$.\\
+                                Then $f(\phi)=( \neg ( f (\phi_0) \rightarrow ( \neg f (\phi_1) ) ) ) $.\\
+                                It is easy to show that $( \neg ( f (\phi_0) \rightarrow ( \neg f (\phi_1) ) ) )$ is equivalent to $f(\phi_0) \wedge f(\phi_1)$.\\
+                                By IH, $\phi_0$ is equivalent to $f(\phi_0)$ and $\phi_1$ is equivalent to $f(\phi_1)$.\\
+                                Thus, it is easy to show that $f(\phi_0) \wedge f(\phi_1)$ is equivalent to$(\phi_0 \wedge \phi_1)$.
+                                Thus, $(\phi_0 \wedge \phi_1)$ is equivalent to $( \neg ( f (\phi_0) \rightarrow ( \neg f (\phi_1) ) ) )$.
+                                Thus, $\phi$ is equivalent to $f(\phi)$.
+                            \item
+                                By IH, $f(\phi_0)$ and $f(\phi_1)$ do not have any truth function symbols except $to$ and $\neg$.\\
+                                Since $f(\phi_0 \wedge \phi_1)=( \neg ( f (\phi_0) \rightarrow ( \neg f (\phi_1) ) ) ) $, clearly, $f(\phi_0 \wedge \phi_1)$ does not have any truth function symbols except $to$ and $\neg$.\\
+                        \end{enumerate}
+                \end{enumerate}
+                etc.
+        \end{itemize}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 3.8.7 in the textbook.
+
+\ \\
+Show that $\neg p$ is not logically equivalent to any formula whose only truth function symbols are $\wedge$, $\vee$, $\rightarrow$ and $\leftrightarrow$. 
+[Show that for any signature $\sigma$, if $A$ is the structure taking every propositional symbol to T, and $\phi$ is built
+up using at most $\wedge$, $\vee$, $\rightarrow$ and $\leftrightarrow$, then $A^* (\phi) = $T.]
+\end{exercise}
+
+\begin{proof}\ \\
+    Let $\sigma$ be an arbitrary signature, $q$ and $r$ be arbitrary propositional symbols, $\phi$, $\phi_0$, $\phi_1$ be an arbitrary formula whose only truth function symbols are $\wedge$, $\vee$, $\rightarrow$ and $\leftrightarrow$ and $A$ be the structure taking every propositional symbol to T.\\
+    
+    We use induction on $\phi$.
+    
+    \begin{itemize}
+        \item[\textbf{BS:}]
+            Suppose $\phi=q \wedge r$.\\
+            Since $A$ is the structure taking every propositional symbol to T, $A^*(\phi)=T$.\\
+            Similarly, when $\phi=q \vee r$, $\phi=q \to r$ or $\phi=q \leftrightarrow r$, $A^*(\phi)=T$ holds.
+        \item[\textbf{IH:}]
+            $A^*(\phi_0)=T$ and $A^*(\phi_1)=T$.
+        \item[\textbf{IS:}]
+            By IH, $A^*(\phi_0)=T$, $A^*(\phi_1)=T$.\\
+            Thus, when $\phi=\phi_0 \vee \phi_1$, $A^*(\phi)=A^*(\phi_0 \wedge \phi_1)=T$ holds.\\
+            Similarly, when $\phi=\phi_0 \to \phi_1$ or $\phi=\phi_0 \leftrightarrow \phi_1$, $A^*(\phi)=T$ holds.
+    \end{itemize}
+    Thus, the truth value of all formulas whose only truth function symbols are $\wedge$, $\vee$, $\rightarrow$ and $\leftrightarrow$ under $A$ is $T$.\\
+    But $A^*(\neg p)=F$.
+    Thus, $\neg p$ is not logically equivalent to any formula whose only truth function symbols are $\wedge$, $\vee$, $\rightarrow$ and $\leftrightarrow$. 
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 3.9.1 in the textbook.
+
+\ \\
+In the proof of Theorem 3.9.2, add clauses dealing with the cases where $R$ is ($\wedge$I) and where $R$ is ($\vee$E).
+\end{exercise}
+
+\begin{proof}\  
+    \begin{itemize}
+        \item \textbf{Case 1:} The right label is $(\wedge I)$.\\
+         Then $D$ is of the following form:   
+            \begin{prooftree}
+                \AxiomC{$D_1$}
+                \noLines
+                \UnaryInfC{$\phi$}
+                \AxiomC{$D_2$}
+                \noLine
+                \UnaryInfC{$\psi$}
+                \RightLabel{($\wedge$I)}
+                \BinaryInfC{$\phi \wedge \psi$}
+            \end{prooftree}
+        Then the set of undischarged assumptions of $D_1$ is contained in $\Gamma$. So does $D_2$.\\
+        Moreover, the conclusion of $D_1$ is $\phi$ and the conclusion of $D_2$ is $\psi$.\\
+        Since the height of $D_1$ and $D_2$ are less than $k$, IH holds for $D_1$ and $D_2$. Thus, $\Gamma \models_\sigma \phi$ and $\Gamma \models_\sigma \psi$. \\
+        Therefore, for every $\sigma$- structure $A$, if $\models_A \Gamma$, then $\models_A \phi$ and $\models_A \psi$. By definition, $\models_A \phi \wedge \psi$ holds.\\
+        Thus, $\Gamma \models_\sigma \phi \wedge \psi$.
+        
+        \item \textbf{Case 2:} The right label is $(\vee E)$.\\
+         Then $D$ is of the following form:
+            \begin{prooftree}
+                \AxiomC{$D'$}
+                \noLine
+                \UnaryInfC{$(\phi \vee \psi)$}
+                \AxiomC{$[\phi]$}
+                \noLine 
+                \UnaryInfC{$D_1$} 
+                \noLine 
+                \UnaryInfC{$\chi$}
+                \AxiomC{$[\psi]$}
+                \noLine 
+                \UnaryInfC{$D_2$} 
+                \noLine 
+                \UnaryInfC{$\chi$}
+                \RightLabel{($\vee$E)}
+                \TrinaryInfC{$\chi$}
+            \end{prooftree}
+        The set of undischarged assumptions of $D'$ is contained in $\Gamma $.\\
+        The set of undischarged assumptions of $D_1$ is contained in $\Gamma \cup \{\phi\}$.\\
+        The set of undischarged assumptions of $D_2$ is contained in $\Gamma \cup \{\psi\}$.\\
+        Moreover, the conclusion of $D'$ is $(\phi \vee \psi)$ and the conclusion of $D_1$ and $D_2$ are both $\chi$.\\
+        Since the height of $D'$, $D_1$ and $D_2$ are less than $k$, IH holds for $D'$, $D_1$ and $D_2$.\\ 
+        Thus, $\Gamma \models_\sigma (\phi \vee \psi)$, $\Gamma \cup \{\phi\} \models_\sigma \chi$ and $\Gamma \cup \{\psi\} \models_\sigma \chi$. \\
+        Therefore, for every $\sigma$- structure $A$, if $\models_A \Gamma$, then $\models_A (\phi \vee \psi)$.\\
+        By definition, $\models_A \phi$ or $\models_A \psi$ holds.
+        \begin{enumerate}
+            \item 
+            When $\models_A \phi$ holds, then $\models_A \Gamma \cup \{\phi\}$ holds.\\
+            Thus, $\models_A \chi$ holds.
+            \item
+            When $\models_A \psi$ holds, then $\models_A \Gamma \cup \{\psi\}$ holds.\\
+            Thus, $\models_A \chi$ holds.
+        \end{enumerate}
+        Therefore, $\Gamma \models_\sigma \chi$ holds.
+    \end{itemize}
+\end{proof}
+
+\ \\
+\begin{exercise}
+Please solve Exercise 3.9.2 in the textbook.
+
+\ \\
+The following argument shows that Peirce's Formula $((( p \rightarrow q) \rightarrow p) \rightarrow p)$ (from Example 3.4.5) can't be proved using just the Axiom Rule and the rules ($\rightarrow$I) and ($\rightarrow$E); your task is to fill in the details. 
+Instead of two truth values T and F, we introduce three truth values $1$, $\frac{1}{2}$, $0$. 
+Intuitively $1$ is truth, $0$ is falsehood and $\frac{1}{2}$ is somewhere betwixt and between. 
+If $\phi$ has the value $i$ and $\psi$ has the value $j$ (so $i , j \in \{ 1, \frac{1}{2} , 0 \}$ ), then the value of $( \phi \rightarrow \psi )$ is 
+%
+\begin{center}
+(3.69)\qquad the greatest real number $r \leq 1$ such that $min \{ r, i \} \leq j$
+\end{center}
+%
+\begin{itemize}
+
+\item[(a)] Write out the truth table for $\rightarrow$ using the three new truth values.
+(For example, you can check that $( p \rightarrow q )$ has the value $\frac{1}{2}$ when $p$ has value $1$ and $q$ has value $\frac{1}{2}$.)
+
+\item[(b)] Find values of $p$ and $q$ for which the value of $((( p \rightarrow q) \rightarrow p) \rightarrow p)$ is not $1$.
+
+\item[(c)] Show that the following holds for every derivation $D$ using at most the Axiom Rule, ($\rightarrow$I) and ($\rightarrow$E): 
+If $\psi$ is the conclusion of $D$ and $A$ is a structure with $A^* (\psi) < 1$, then $A^*( \phi ) \leq A^* (\psi)$ for some
+undischarged assumption $\phi$ of $D$. 
+[The argument is very similar to the proof of Theorem 3.9.2, using induction on the height of $D$.]
+\end{itemize}
+\end{exercise}
+
+\begin{proof}\ \\
+\begin{itemize}
+    \item[(a)]\ 
+        \begin{center}
+        \begin{tabular}{cc||c}
+        $p$           & $q$            & $( p \rightarrow q )$  \\
+        \hline
+        $0$           & $0$            & 1						\\
+        $0$           & $\frac{1}{2}$  & 1						\\
+        $0$           & $1$            & 1						\\
+        $\frac{1}{2}$ & $0$			   & 0						\\
+        $\frac{1}{2}$ & $\frac{1}{2}$  & 1						\\
+        $\frac{1}{2}$ & $1$			   & 1						\\
+        $1$			  & $0$			   & 0						\\
+        $1$			  & $\frac{1}{2}$  & $\frac{1}{2}$						\\
+        $1$           & $1$			   & 1						
+        \end{tabular}
+        \end{center}
+    \item[(b)]\ 
+        When $p=\frac{1}{2}$ and $q=0$, the value of $((( p \rightarrow q) \rightarrow p) \rightarrow p)$ is not $1$.
+    \item[(c)]\
+        We use induction on the height of $D$.
+        \begin{itemize}
+            \item[\textbf{BS:}] 
+            Consider the case when $D$ is of height $0$.\\
+            Assume that the conclusion of $D$ is $\psi$ and the undischarged assumptions of $D$ are all in $\Gamma$.\\
+            Then $D$ is of the following form:
+                \begin{prooftree}
+                \AxiomC{$\psi$}
+                \end{prooftree}
+             Assume that $A$ is a structure with $A^* (\psi) < 1$.\\
+            Obviously, $A^*( \psi ) \leq A^* (\psi)$ holds and $\psi$  is an undischarged assumptions of $D$.
+            
+            \item[\textbf{IH:}]
+            For each derivation $D$ of height at most $k$, if the conclusion of $D$ is $\psi$ and the undischarged assumptions of $D$ are all in $\Gamma$, then if $A$ is a structure with $A^* (\psi) < 1$, then $A^*( \phi ) \leq A^* (\psi)$ for some undischarged assumption $\phi$ of $D$.
+            
+            \item[\textbf{IS:}]
+            Consider the case when the height of $D$ is $k+1$.
+
+            Assume that the conclusion of $D$ is $\psi$ and the undischarged assumptions of $D$ are all in $\Gamma$.
+            
+            According to the right label of the root of $D$, we consider 2 cases.
+            \begin{itemize}
+            \item \textbf{Case 1:} The right label is $(\to E)$.\\
+            Then $D$ is of the following form:
+                \begin{prooftree}
+                    \AxiomC{$D_1$}
+                    \noLine
+                    \UnaryInfC{$\phi$}
+                    \AxiomC{$D_2$}
+                    \noLine
+                    \UnaryInfC{$( \phi \rightarrow \psi )$}
+                    \RightLabel{($\rightarrow$E)}
+                    \BinaryInfC{$\psi$}
+                \end{prooftree}
+            Let $A$ be a structure with $A^* (\phi) < 1$, $A^* ((\phi \to \psi)) < 1$ and $A^* (\psi) < 1$.\\
+            Then we only have one case in which $A^* (\phi) = \frac{1}{2}$ and $A^* (\psi) = 0$.\\
+            By IH, $A^*( \chi) \leq A^* ((\phi \to \psi))$ for some undischarged assumption $\chi$ of $D_2$.\\
+            Since $A^* ((\phi \to \psi))=A^*(\psi)$ and $\chi \in \Gamma$, $A^*( \chi) \leq A^* (\psi)$ for some undischarged assumption $\chi$ of $D$ holds. 
+            
+            \item \textbf{Case 2:} The right label is $(\to I)$.\\
+            Then $D$ is of the following form:
+                \begin{prooftree}
+                    \AxiomC{$[\phi]$}
+                    \noLine
+                    \UnaryInfC{$D'$}
+                    \noLine
+                    \UnaryInfC{$\psi$}
+                    \RightLabel{($\rightarrow$I)}
+                    \UnaryInfC{$(\phi \rightarrow \psi)$}
+                \end{prooftree}
+            Let $A$ be a structure with $A^* ((\phi \to \psi)) < 1$ and $A^* (\psi) < 1$.\\
+            Then we have 3 cases to consider:
+                \begin{enumerate}
+                    \item $A^*(\phi)= \frac{1}{2}$ and $A^*(\psi)= 0$\\
+                    By IH, $A^*( \chi) \leq A^* (\psi)$ for some undischarged assumption $\chi$ of $D'$.\\
+                    Since $\chi \in \Gamma \cup \{\phi\}$ and $A^*(\phi)>A^*(\psi) \ge A^*(\chi)$, $\chi \in \Gamma$ holds.\\
+                    Since $A^* ((\phi \to \psi))=A^*(\psi)$, $A^*( \chi) \leq A^* ((\phi \to \psi))$ for some undischarged assumption $\chi$ of $D$ holds.
+                    \item $A^*(\phi)= 1$ and $A^*(\psi)= 0$\\
+                    Similar to 1.
+                    \item $A^*(\phi)= 1$ and $A^*(\psi)= \frac{1}{2}$\\
+                    Similar to 1.
+                \end{enumerate}
+            \end{itemize}
+        \end{itemize}
+\end{itemize}
+\end{proof}
+
+%文档内容结束
+\end{document}
