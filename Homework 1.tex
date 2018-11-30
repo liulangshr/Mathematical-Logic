@@ -1,0 +1,209 @@
+%定义文档类型和基本的页面设置
+\documentclass[12pt,a4paper,utf8]{article}
+
+%加载要用到的宏包
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+%自定义环境
+\theoremstyle{plain}
+\newtheorem{exercise}{Exercise}
+
+%文档的标题
+\title{Homework 1}
+
+%文档的作者
+\author{\\
+Number: }
+
+%文档的日期https://www.overleaf.com/project/5bac77615b325f68f73dbf9e
+\date{Deadline: 23:59, October 8th, 2018}
+
+%文档内容开始
+\begin{document}
+
+%打出文档的标题、作者、日期等信息
+\maketitle
+
+\begin{exercise}
+Please give an example of two sets $A$ and $B$ for which $\bigcup A = \bigcup B$ but $A \neq B$. 
+\end{exercise}
+
+\begin{proof}[Solution]\ \\
+Let $A=\{\{1\},\{2\}\}$. 
+Let $B=\{\{1,2\}\}$. 
+Then $\bigcup A =\{1,2\}$, and $\bigcup B=\{1,2\}$. 
+Therefore,  $\bigcup A = \bigcup B$ but $A \neq B$. 
+
+\end{proof}
+
+\ \\
+\begin{exercise}
+Let $A$ and $B$ be two sets (of sets).
+Please prove all of the following:
+%
+\begin{enumerate}
+
+\item for each set $C$, if $C \in A$, then $C \subseteq \bigcup A$;
+
+\item if $A \subseteq B$, then $\bigcup A \subseteq \bigcup B$;
+
+\item if $A \subseteq \wp B$, then $\bigcup A \subseteq B$;
+
+\item if $A \neq \emptyset$ and $A \subseteq B$, then $\bigcap B \subseteq \bigcap A$;
+
+\item $\bigcap ( A \cup B ) = \bigcap A \cap \bigcap B$;
+
+\item $\wp A \cap \wp B = \wp (A \cap B)$;
+
+\item if $A \in B$, then $\wp A \in \wp \wp \bigcup B$;
+
+\item $A = \bigcup \wp A$.
+
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}\ 
+\begin{enumerate}
+
+    \item 
+    Let $C$, $B$ and $A$ be arbitrary sets. 
+    
+    Let $x$ be an arbitrary object. 
+    
+    If $C \in A$, then for every $x \in C$, there is a set $B \in A$ and $x \in B$ (just let $C$ be the set $B$). 
+    
+    By the definition of arbitrary union, for every $x \in C$, $x \in \bigcup A$ holds. 
+    
+    Therefore, $C \subseteq \bigcup A$. Since $A$, $B$ and $C$ are arbitrary, for each set $C$, if $C \in A$, then $C \subseteq \bigcup A$.
+    
+    \item 
+    Let $A$, $B$ and $C$ be arbitrary sets, $x$ be arbitrary object. 
+    
+    If $A \subseteq B$, by the definition of subset, for every $C \in A$, $C \in B$ holds. 
+    
+    By the definition of arbitrary union, $\bigcup A=\{x \vert there\ is\ a\ set\ C \in A\ and\ x \in C \} $, $\bigcup B=\{x \vert there\ is\ a\ set\ C \in B\ and\ x \in C \} $.
+    
+    Thus, for every $x \in \bigcup A$, $x \in \bigcup B$ holds. 
+    
+    Therefore, $\bigcup A \subseteq \bigcup B$. Since $A$, $B$, $x$ and $C$ are arbitrary, if $A \subseteq B$, then $\bigcup A \subseteq \bigcup B$.
+    
+    \item 
+    Let $A$, $B$ and $C$ be arbitrary sets, $x$ be an arbitrary object, and $C \in A$. 
+    
+    If $A \subseteq \wp B$, by the definition of subset, then $C \in \wp B$. 
+    
+    By the definition of power set, $C \subseteq B$. Thus, for each $x \in C$, $x \in B$ holds. 
+    
+    Thus, for each $x \in \bigcup A$, there is a set $C \in A ,\ x \in C\ and\ x \in B$. 
+    
+    Therefore, $\bigcup A \subseteq B$. Since $A$, $B$, $x$ and $C$ are arbitrary, if $A \subseteq \wp B$, then $\bigcup A \subseteq B$.
+    
+    \item 
+    Let $A$, $B$ and $C$ be arbitrary sets, $x$ be an arbitrary object. 
+    
+    If $x \in \bigcap B$, then for each $C \in B$, $x \in C$. 
+    
+    Since $A \neq \emptyset$ and $A \subseteq B$, then for each $C \in A$, $C \in B$ holds. 
+    
+    Thus, for each $x \in \bigcap B$, if $C \in A$, then $x \in C$. 
+    
+    Therefore, $\bigcap B \subseteq \bigcap A$. $ \strictif $
+    
+    \item 
+    Let $A$, $B$ and $C$ be arbitrary sets, $x$ be an arbitrary object. 
+    
+    $x \in \bigcap (A \cup B)$ iff for each $C \in A \cup B$
+    
+    $x \in C$ $x \in \bigcap (A \cup B)$ iff for each $C$, if $C \in A\ or\ C \in B$, then $x \in C$.
+    
+    $x \in \bigcap (A \cup B)$ iff for each $C$ if $C \in A$, then $x \in C$, and if $C \in B$, then $x \in B$
+    
+    $x \in \bigcap (A \cup B)$ iff $x \in \bigcap A$ and $x \in \bigcap B$
+    
+    $x \in \bigcap (A \cup B)$ iff $x \in \bigcap A \cap \bigcap B$
+    
+    Since $A$, $B$, $x$ and $C$ are arbitrary, and by the principle of extensionality, $\bigcap (A \cup B) = \bigcap A \cap \bigcap B$.
+    
+    \item
+    Let $A$, $B$ and $X$ be arbitrary sets, $x$ be an arbitrary object.
+    
+    $X \in \wp A \cap \wp B$ iff $X \in \wp A\ and\ X \in \wp B$
+    
+    $X \in \wp A \cap \wp B$ iff $X \subseteq A$ and $X \subseteq B$
+    
+    $X \in \wp A \cap \wp B$ iff $X \subseteq A \cap B$
+    
+    $X \in \wp A \cap \wp B$ iff $X \in \wp (A \cap B)$
+    
+    Since $A$, $B$, $x$ and $X$ are arbitrary, and by the principle of extensionality, $\wp A \cap \wp B = \wp (A \cap B)$.
+    
+    \item
+    Let $A$, $B$ and $X$ be arbitrary sets.
+    
+    Assume $A \in B$.
+    
+    From 1, we can infer $A \subseteq \bigcup B$. 
+    Plus $\wp A = \{ X \vert X \subseteq A\}$. Then:
+    
+    If $X \in \wp A$, then $X \subseteq \bigcup B$. Thus, $X \in \wp \bigcup B$.
+    
+    Thus, $\wp A \subseteq \wp \bigcup B$.
+    
+    Therefore, $\wp A \in \wp \wp \bigcup B$.
+    
+    Since $A$, $B$ and $X$ are arbitrary, if $A \in B$, then $\wp A \in \wp \wp \bigcup B$.
+    
+    \item
+    Let $A$ and $B$ be arbitrary sets, $x$ be an arbitrary object.
+    
+    $x \in \bigcup \wp A$ iff there is a set $B$ such that $B \in \wp A$ and $x \in B$
+    
+    $x \in \bigcup \wp A$ iff there is a set $B$ such that $B \subseteq A$ and $x \in B$
+    
+    $x \in \bigcup \wp A$ iff $x \in A$
+    
+    Since $A$, $B$ and $x$ are arbitrary, and by the principle of extensionality, $A = \bigcup \wp A$.
+    
+\end{enumerate} 
+\end{proof}
+
+\ \\
+\begin{exercise}
+Let $A$, $B$ and $C$ be sets such that $A \cup B = A \cup C$ and $A \cap B = A \cap C$. 
+Please prove that $B = C$. 
+\end{exercise}
+
+\begin{proof}\ 
+
+    Let $x$ be an arbitrary object.
+    
+        If $x \in B$, then $x \in A \cup B$.
+        
+        By $A \cup B = A \cup C$, $x \in A \cup C$.
+        
+            Assume $x$ only belongs to A.
+            
+            Then $x \notin C$ and $x \in A$.
+            
+            Thus, $x \in A \cap B$. By $A \cap B = A \cap C$, $x \in C$. 
+            
+            This contradicts $x \notin C$. The assumption is false. $x$ also belongs to $C$.
+            
+        Therefore, if $x \in B$, then $x \in C$.
+        
+        Similarly, we can prove that if $x \in C$, then $x \in B$.
+        
+        Therefore, $B = C$.
+            
+            
+        
+        
+
+\end{proof}
+
+
+\end{document}
